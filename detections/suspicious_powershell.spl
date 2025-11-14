@@ -1,0 +1,7 @@
+index=sysmon OR index=wineventlog
+| search (EventCode=4104 OR Image="*powershell.exe")
+| search CommandLine="*-EncodedCommand*" OR CommandLine="*IEX*" OR CommandLine="*Invoke-WebRequest*" 
+| stats count by host, user, CommandLine, _time
+| where count > 0
+
+
