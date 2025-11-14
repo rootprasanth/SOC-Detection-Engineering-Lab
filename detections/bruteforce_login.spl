@@ -1,0 +1,4 @@
+index=wineventlog EventCode=4625
+| stats count as failed_attempts by src_ip, user
+| where failed_attempts > 10
+| sort - failed_attempts
