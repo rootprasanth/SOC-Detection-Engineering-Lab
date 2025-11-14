@@ -1,0 +1,6 @@
+index=network sourcetype=stream:tcp OR sourcetype=netflow
+| bin _time span=1m
+| stats count by src_ip, dest_ip, dest_port, _time
+| eventstats avg(count) as avg_count by src_ip, dest_ip
+| where count > avg_count * 3 AND count < 50
+| sort - count
