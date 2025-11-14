@@ -1,0 +1,3 @@
+index=sysmon EventCode=13 
+| search RegistryKey="*CurrentVersion\\Run*"
+| table _time, host, user, RegistryKey, RegistryValueName, RegistryValueData
